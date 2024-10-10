@@ -1,0 +1,43 @@
+services:
+  config1:
+    container_name: config1
+    image: mongo
+    command: mongod --configsvr --replSet config --port 27017 --dbpath /data/db
+    ports:
+      - 12001:27017
+    volumes:
+      - config1:/data/db
+    networks:
+      - mongo
+
+  config2:
+    container_name: config2
+    image: mongo
+    command: mongod --configsvr --replSet config --port 27017 --dbpath /data/db
+    ports:
+      - 12002:27017
+    volumes:  
+      - config2:/data/db
+    networks:
+      - mongo
+
+  config3:
+    container_name: config3
+    image: mongo
+    command: mongod --configsvr --replSet config --port 27017 --dbpath /data/db
+    ports:
+      - 12003:27017
+    volumes:
+      - config3:/data/db
+    networks:
+      - mongo
+
+volumes:
+  config1: {}
+  config2: {}
+  config3: {}
+
+networks:
+  mongo:
+    name: mongo
+    external: true

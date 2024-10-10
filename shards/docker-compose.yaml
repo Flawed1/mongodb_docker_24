@@ -1,0 +1,79 @@
+services:
+  shard1_1:
+    container_name: shard1_1
+    image: mongo
+    command: mongod --shardsvr --replSet shard1 --port 27017 --dbpath /data/db
+    ports:
+      - 12110:27017
+    volumes:
+      - shard1_1:/data/db
+    networks:
+      - mongo
+  
+  shard1_2:
+    container_name: shard1_2
+    image: mongo
+    command: mongod --shardsvr --replSet shard1 --port 27017 --dbpath /data/db
+    ports:
+      - 12111:27017
+    volumes:
+      - shard1_2:/data/db
+    networks:
+      - mongo
+
+  shard1_3:
+    container_name: shard1_3
+    image: mongo
+    command: mongod --shardsvr --replSet shard1 --port 27017 --dbpath /data/db
+    ports:
+      - 12112:27017
+    volumes:
+      - shard1_3:/data/db
+    networks:
+      - mongo
+  
+  shard2_1:
+    container_name: shard2_1
+    image: mongo
+    command: mongod --shardsvr --replSet shard2 --port 27017 --dbpath /data/db
+    ports:
+      - 12120:27017
+    volumes:
+      - shard2_1:/data/db
+    networks:
+      - mongo
+  
+  shard2_2:
+    container_name: shard2_2
+    image: mongo
+    command: mongod --shardsvr --replSet shard2 --port 27017 --dbpath /data/db
+    ports:
+      - 12121:27017
+    volumes:
+      - shard2_2:/data/db
+    networks:
+      - mongo
+
+  shard2_3:
+    container_name: shard2_3
+    image: mongo
+    command: mongod --shardsvr --replSet shard2 --port 27017 --dbpath /data/db
+    ports:
+      - 12122:27017
+    volumes:
+      - shard2_3:/data/db
+    networks:
+      - mongo
+
+volumes:
+  shard1_1: {}
+  shard1_2: {}
+  shard1_3: {}
+  shard2_1: {}
+  shard2_2: {}
+  shard2_3: {}
+
+networks:
+  mongo:
+    name: mongo
+    external: true
