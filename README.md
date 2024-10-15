@@ -121,7 +121,7 @@ db.movies.createIndex({year: "hashed"})
 
 sh.shardCollection("test.movies",{year: "hashed"})
 ```
-Выполняем балансировку
+Проверяем статус балансировки
 ```javascript
 sh.balancerCollectionStatus("test.movies")
 ```
