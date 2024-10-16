@@ -125,7 +125,22 @@ sh.shardCollection("test.movies",{year: "hashed"})
 ```javascript
 sh.balancerCollectionStatus("test.movies")
 ```
+![](./images/balanced.png)
+
 Делим чанк
 ```javascript
 sh.splitFind("test.movies", { "year": "1903" })
 ```
+## Запросы к БД
+Делаем запрос к одному шарду с планом выполнения
+```javascript
+db.movies.find({year: 1900}).explain()
+```
+Поиск фильмов идёт на одном шарде, т.к. данные шардированы по году. 
+![](./images/shard1.png)
+Делаем _shard merge_ запрос с планом выполнения
+```javascript
+db.movies.find({href: {$ne: null}}).explain()
+```
+Т.к. данные не шардированы по _href_, идет запрос ко всем шардам.
+![](./images/shard_merge.png)
